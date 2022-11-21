@@ -1,15 +1,14 @@
 package contacts;
 
-public class User {
+public class User extends Contact{
 
     private String name;
     private String surname;
-    private String number;
 
     public User(String name, String surname, String number) {
+        super(number);
         this.name = name;
         this.surname = surname;
-        this.number = number;
     }
 
     public String getName() {
@@ -33,12 +32,5 @@ public class User {
         this.surname = surname;
     }
 
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
 
 }

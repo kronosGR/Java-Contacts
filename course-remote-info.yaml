@@ -3,7 +3,7 @@ hyperskill_project:
   ide_files: https://stepik.org/media/attachments/lesson/204791/additional_files.json
   is_template_based: false
   use_ide: true
-update_date: Tue, 15 Nov 2022 18:22:11 UTC
+update_date: Fri, 18 Nov 2022 09:52:47 UTC
 stages:
 - id: 228
   step: 5324
@@ -239,6 +239,16 @@ topics:
     theory_id: 3592
   - title: LocalDateTime
     theory_id: 3617
+  - title: Generics and Object
+    theory_id: 3493
+  - title: The Collections Framework overview
+    theory_id: 3624
+  - title: The List interface
+    theory_id: 3581
+  - title: The Set interface
+    theory_id: 3575
+  - title: Enumset
+    theory_id: 19793
   - title: Encapsulating object creation
     theory_id: 3577
   - title: Factory method
@@ -253,6 +263,8 @@ topics:
     theory_id: 17108
   - title: Abstract factory
     theory_id: 5732
+  - title: The Object class
+    theory_id: 3596
   - title: Abstract class
     theory_id: 3597
   - title: Abstract class vs interface
@@ -282,5 +294,3 @@ topics:
     theory_id: 8147
   - title: Custom serialization
     theory_id: 3616
-  - title: The Object class
-    theory_id: 3596

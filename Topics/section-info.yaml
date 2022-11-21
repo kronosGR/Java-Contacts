@@ -2,3 +2,12 @@ content:
 - Regexes in programs
 - Match results
 - Builder
+- Reflection basics
+- Runtime type checking
+- LocalTime
+- LocalDate
+- LocalDateTime
+- The Set interface
+- Enumset
+- Command
+- Abstract factory
