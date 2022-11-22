@@ -3,13 +3,12 @@ package contacts;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static contacts.Utils.checkNumber;
+
 public class Contacts {
     Scanner sc = new Scanner(System.in);
-    ArrayList<User> contacts = new ArrayList<>();
+    ArrayList<Contact> contacts = new ArrayList<>();
 
-    private boolean checkNumber(String number) {
-        return number.matches("^\\+?(\\(\\w+\\)|\\w+[ -]\\(\\w{2,}\\)|\\w+)([ -]\\w{2,})*");
-    }
 
     private void count() {
         System.out.println("The Phone Book has " + contacts.size() + " records.");
@@ -25,7 +24,7 @@ public class Contacts {
         System.out.println("Select record:");
         String record = sc.nextLine();
 
-        contacts.remove(Integer.parseInt(record)  - 1);
+        contacts.remove(Integer.parseInt(record) - 1);
         System.out.println("The record removed!");
     }
 
@@ -38,45 +37,17 @@ public class Contacts {
         this.list();
         System.out.println("Select record:");
         String record = sc.nextLine();
-        System.out.println("Select a field (name, surname, number):");
-        String field = sc.nextLine();
 
-        switch (field) {
-            case "name":
-                System.out.println("Enter name:");
-                contacts.get(Integer.parseInt(record) - 1).setName(sc.nextLine());
-                break;
-            case "surname":
-                System.out.println("Enter surname:");
-                contacts.get(Integer.parseInt(record)  - 1).setSurname(sc.nextLine());
-                break;
-            case "number":
-                System.out.println("Enter number:");
-                String num =sc.nextLine();
-                if (!checkNumber(num)) {
-                    System.out.println("Wrong number format!");
-                    num = "[no number]";
-                }
-                contacts.get(Integer.parseInt(record)  - 1).setNumber(num);
-                break;
-        }
+        EditFactory factory = new EditFactory();
+        Contact cont = factory.editAccount(contacts.get(Integer.parseInt(record) + 1));
+        contacts.set(Integer.parseInt(record) + 1, cont);
 
         System.out.println("The record updated!");
     }
 
     private void add() {
-        System.out.println("Enter the name:");
-        String name = sc.nextLine();
-        System.out.println("Enter the surname:");
-        String surname = sc.nextLine();
-        String number;
-        System.out.println("Enter the number:");
-        number = sc.nextLine();
-        if (!checkNumber(number)) {
-            System.out.println("Wrong number format!");
-            number = "[no number]";
-        }
-        contacts.add(new User(name, surname, number));
+        AddFactory addFactory = new AddFactory();
+        contacts.add(addFactory.createContact());
         System.out.println("The record added");
     }
 
@@ -86,9 +57,18 @@ public class Contacts {
         }
     }
 
+    private void info() {
+        this.list();
+        System.out.println("Enter index to show info:");
+        String index = sc.nextLine();
+        Contact c = contacts.get(Integer.parseInt(index) + 1);
+        System.out.println(c.getInfo());
+    }
+
     public void getMenu() {
         while (true) {
-            System.out.println("Enter action (add, remove, edit, count, list, exit):");
+            System.out.println();
+            System.out.println("Enter action (add, remove, edit, count, info, exit):");
 
             String choice = sc.nextLine();
             if (choice.equals("exit")) {
@@ -108,8 +88,8 @@ public class Contacts {
                 case "add":
                     this.add();
                     break;
-                case "list":
-                    this.list();
+                case "info":
+                    this.info();
                     break;
             }
 

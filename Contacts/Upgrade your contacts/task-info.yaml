@@ -388,6 +388,38 @@ files:
 - name: src/contacts/Organization.java
   visible: true
   learner_created: true
+- name: src/contacts/Gender.java
+  visible: true
+  learner_created: true
+- name: src/contacts/ContactType.java
+  visible: true
+  learner_created: true
+- name: src/contacts/AddFactory.java
+  visible: true
+  learner_created: true
+- name: src/contacts/Utils.java
+  visible: true
+  learner_created: true
+- name: src/contacts/EditFactory.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/5326#comment
-status: Unchecked
+status: Failed
+feedback:
+  message: "Exception in test #6\n\njava.lang.IndexOutOfBoundsException: Index 2 out\
+    \ of bounds for length 1\n\tat java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)\n\
+    \tat java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)\n\
+    \tat java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:266)\n\
+    \tat java.base/java.util.Objects.checkIndex(Objects.java:359)\n\tat java.base/java.util.ArrayList.get(ArrayList.java:427)\n\
+    \tat contacts.Contacts.info(Contacts.java:64)\n\tat contacts.Contacts.getMenu(Contacts.java:92)\n\
+    \tat contacts.Main.main(Main.java:19)\n\nPlease find below the output of your\
+    \ program during this failed test.\nNote that the &#39;&gt;&#39; character indicates\
+    \ the beginning of the input line.\n\n---\n\nEnter action (add, remove, edit,\
+    \ count, info, exit):\n&gt; add\nEnter the type (person, organization):\n&gt;\
+    \ person\nEnter the name:\n&gt; John\nEnter the surname:\n&gt; Smith\nEnter the\
+    \ birth date:\n&gt; \nBad birth date!\nEnter the gender (M, F)\n&gt; \nBad gender!\n\
+    Enter the number:\n&gt; 123 456 789\nThe record added\n\nEnter action (add, remove,\
+    \ edit, count, info, exit):\n&gt; info\n1. John Smith\nEnter index to show info:\n\
+    &gt; 1"
+  time: Tue, 22 Nov 2022 11:32:15 UTC
 record: -1
