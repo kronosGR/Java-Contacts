@@ -9,7 +9,7 @@ public class EditFactory {
         String field;
         String value;
 
-        switch (cont.getClass().toString()) {
+        switch (cont.getClass().getSimpleName()) {
             case "User":
                 User tmp = (User) cont;
                 System.out.println("Select a field (name, surname, birth, gender, number): ");

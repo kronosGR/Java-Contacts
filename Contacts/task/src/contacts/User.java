@@ -73,11 +73,11 @@ public class User extends Contact {
     public String getInfo() {
         return "Name: " + this.name +
                 "\nSurname: " + this.surname +
-                "\nBirth date: " + (this.birthDate == null ? this.birthDate.toString() : "[no data]") +
-                "\nGender: " + (this.gender == null ? this.gender.toString() : "[no data]") +
+                "\nBirth date: " + (this.birthDate != null ? this.birthDate.toString() : "[no data]") +
+                "\nGender: " + (this.gender != null ? this.gender.toString() : "[no data]") +
                 "\nNumber: " + number +
-                "\nTime Created: " + creationDateTime.toString() +
-                "\nTime last edit: " + lastEditDateTime.toString();
+                "\nTime created: " + Contact.formatDate(creationDateTime) +
+                "\nTime last edit: " + Contact.formatDate(lastEditDateTime);
     }
 
     @Override
@@ -100,6 +100,7 @@ public class User extends Contact {
                     System.out.println("Wrong number format!");
                     number = "[no number]";
                 }
+                number = value;
                 break;
         }
     }

@@ -1,6 +1,7 @@
 package contacts;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public abstract class Contact {
 
@@ -11,13 +12,20 @@ public abstract class Contact {
     protected LocalDateTime lastEditDateTime;
 
     public Contact(){
-
-    }
-    public Contact (String name, String number){
-        this.name = name;
-        this.number = number;
         this.creationDateTime = LocalDateTime.now();
         this.lastEditDateTime = LocalDateTime.now();
+    }
+
+    public Contact (String name, String number){
+        this();
+        this.name = name;
+        this.number = number;
+    }
+
+    public static String formatDate(LocalDateTime date){
+        DateTimeFormatter outputFormatter = DateTimeFormatter
+                .ofPattern("uuuu-MM-dd'T'HH:mm");
+        return date.format(outputFormatter);
     }
     public String getName() {
         return name;

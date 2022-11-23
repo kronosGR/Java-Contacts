@@ -39,8 +39,8 @@ public class Contacts {
         String record = sc.nextLine();
 
         EditFactory factory = new EditFactory();
-        Contact cont = factory.editAccount(contacts.get(Integer.parseInt(record) + 1));
-        contacts.set(Integer.parseInt(record) + 1, cont);
+        Contact cont = factory.editAccount(contacts.get(Integer.parseInt(record) - 1));
+        contacts.set(Integer.parseInt(record) - 1, cont);
 
         System.out.println("The record updated!");
     }
@@ -61,7 +61,7 @@ public class Contacts {
         this.list();
         System.out.println("Enter index to show info:");
         String index = sc.nextLine();
-        Contact c = contacts.get(Integer.parseInt(index) + 1);
+        Contact c = contacts.get(Integer.parseInt(index) - 1);
         System.out.println(c.getInfo());
     }
 

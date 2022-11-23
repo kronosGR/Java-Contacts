@@ -32,8 +32,8 @@ public class Organization extends Contact {
         return "Organization name: " + this.name +
                 "\nAddress: " + address +
                 "\nNumber: " + number +
-                "\nTime Created: " + creationDateTime.toString() +
-                "\nTime last edit: " + lastEditDateTime.toString();
+                "\nTime created: " + Contact.formatDate(creationDateTime) +
+                "\nTime last edit: " + Contact.formatDate(lastEditDateTime);
     }
 
     @Override
@@ -50,6 +50,7 @@ public class Organization extends Contact {
                     System.out.println("Wrong number format!");
                     number = "[no number]";
                 }
+                number = value;
                 break;
         }
     }
