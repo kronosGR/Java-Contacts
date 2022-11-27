@@ -12,11 +12,11 @@ public class AddFactory {
         String number;
         String name;
 
-        System.out.println("Enter the type (person, organization):");
+        System.out.println("[add] Enter the type (person, organization) or back: :");
         String in = sc.nextLine();
 
-        switch (ContactType.valueOf(in.toUpperCase())) {
-            case PERSON:
+        switch (in) {
+            case "person":
                 User us = new User();
                 System.out.println("Enter the name:");
                 name = sc.nextLine();
@@ -39,7 +39,7 @@ public class AddFactory {
                 us.setNumber(number);
                 contact = us;
                 break;
-            case ORGANIZATION:
+            case "organization":
                 System.out.println("Enter the organization name:");
                 name = sc.nextLine();
                 System.out.println("Enter the address:");
@@ -52,6 +52,8 @@ public class AddFactory {
                 }
                 contact = new Organization(name, address, number);
                 break;
+            case "back":
+                return null;
         }
 
         return contact;

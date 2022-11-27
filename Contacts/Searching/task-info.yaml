@@ -204,6 +204,491 @@ files:
     \        }\n        catch (Exception ex) {\n            return new CheckResult(false,\
     \ \"Can't check the answer\");\n        }\n    }\n}\n"
   learner_created: false
+- name: src/contacts/ContactType.java
+  visible: true
+  text: |
+    package contacts;
+
+    public enum ContactType {
+        PERSON, ORGANIZATION
+    }
+  learner_created: true
+- name: src/contacts/EditFactory.java
+  visible: true
+  text: |
+    package contacts;
+
+    import java.util.Scanner;
+
+    public class EditFactory {
+        Scanner sc = new Scanner(System.in);
+
+        public Contact editAccount(Contact cont) {
+            String field;
+            String value;
+
+            switch (cont.getClass().getSimpleName()) {
+                case "User":
+                    User tmp = (User) cont;
+                    System.out.println("Select a field (name, surname, birth, gender, number): ");
+                    field = sc.nextLine();
+                    System.out.println("Enter " + field + " :");
+                    value = sc.nextLine();
+                    tmp.setField(field, value);
+                    return tmp;
+                case "Organization":
+                    Organization tmpO = (Organization) cont;
+                    System.out.println("Select a field (address, number): ");
+                    field = sc.nextLine();
+                    System.out.println("Enter " + field + " :");
+                    value = sc.nextLine();
+                    tmpO.setField(field, value);
+                    return tmpO;
+                default:
+                    return null;
+            }
+
+        }
+    }
+  learner_created: true
+- name: src/contacts/Contact.java
+  visible: true
+  text: |
+    package contacts;
+
+    import java.time.LocalDateTime;
+    import java.time.format.DateTimeFormatter;
+
+    public abstract class Contact {
+
+        protected String name;
+        protected String number;
+
+        protected LocalDateTime creationDateTime;
+        protected LocalDateTime lastEditDateTime;
+
+        public Contact(){
+            this.creationDateTime = LocalDateTime.now();
+            this.lastEditDateTime = LocalDateTime.now();
+        }
+
+        public Contact (String name, String number){
+            this();
+            this.name = name;
+            this.number = number;
+        }
+
+        public static String formatDate(LocalDateTime date){
+            DateTimeFormatter outputFormatter = DateTimeFormatter
+                    .ofPattern("uuuu-MM-dd'T'HH:mm");
+            return date.format(outputFormatter);
+        }
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+
+        public String getNumber() {
+            return number;
+        }
+
+        public void setNumber(String number) {
+            this.number = number;
+        }
+
+        public LocalDateTime getCreationDateTime() {
+            return creationDateTime;
+        }
+
+        public void setCreationDateTime(LocalDateTime creationDateTime) {
+            this.creationDateTime = creationDateTime;
+        }
+
+        public LocalDateTime getLastEditDateTime() {
+            return lastEditDateTime;
+        }
+
+        public void setLastEditDateTime(LocalDateTime lastEditDateTime) {
+            this.lastEditDateTime = lastEditDateTime;
+        }
+
+        public String getInfo() {
+            return null;
+        }
+
+        abstract public void setField(String field, String value);
+    }
+  learner_created: true
+- name: src/contacts/Utils.java
+  visible: true
+  text: |
+    package contacts;
+
+    import java.time.LocalDate;
+
+    public class Utils {
+        public static boolean checkNumber(String number) {
+            return number.matches("^\\+?(\\(\\w+\\)|\\w+[ -]\\(\\w{2,}\\)|\\w+)([ -]\\w{2,})*");
+        }
+
+    }
+  learner_created: true
+- name: src/contacts/User.java
+  visible: true
+  text: |
+    package contacts;
+
+    import java.time.DateTimeException;
+    import java.time.LocalDate;
+
+    import static contacts.Utils.checkNumber;
+
+    public class User extends Contact {
+
+        private String surname;
+
+        private LocalDate birthDate;
+
+        private Gender gender;
+
+        public User() {
+        }
+
+        public User(String name, String surname, String number) {
+            super(name, number);
+            this.surname = surname;
+        }
+
+        @Override
+        public String toString() {
+            return name + " " + surname;
+        }
+
+        public String getSurname() {
+            return surname;
+        }
+
+        public void setSurname(String surname) {
+            this.surname = surname;
+        }
+
+        public LocalDate getBirthDate() {
+            return birthDate;
+        }
+
+        public void setBirthDate(String birthDate) {
+            this.birthDate = toDate(birthDate);
+        }
+
+        public Gender getGender() {
+            return gender;
+        }
+
+        public void setGender(String gender) {
+            this.gender = toGender(gender);
+        }
+
+        private LocalDate toDate(String date) {
+            LocalDate ld = null;
+            try {
+                ld = LocalDate.parse(date);
+            } catch (DateTimeException e) {
+                System.out.println("Bad birth date!");
+            }
+            return ld;
+        }
+
+        private Gender toGender(String gender) {
+            Gender g = null;
+            try {
+                g = Gender.valueOf(gender);
+            } catch (Exception e) {
+                System.out.println("Bad gender!");
+            }
+            return g;
+        }
+
+        public String getInfo() {
+            return "Name: " + this.name +
+                    "\nSurname: " + this.surname +
+                    "\nBirth date: " + (this.birthDate != null ? this.birthDate.toString() : "[no data]") +
+                    "\nGender: " + (this.gender != null ? this.gender.toString() : "[no data]") +
+                    "\nNumber: " + number +
+                    "\nTime created: " + Contact.formatDate(creationDateTime) +
+                    "\nTime last edit: " + Contact.formatDate(lastEditDateTime);
+        }
+
+        @Override
+        public void setField(String field, String value) {
+            switch (field) {
+                case "name":
+                    name = value;
+                    break;
+                case "surname":
+                    surname = value;
+                    break;
+                case "birthdate":
+                    birthDate = toDate(value);
+                    break;
+                case "gender":
+                    gender = toGender(value);
+                    break;
+                case "number":
+                    if (!checkNumber(value)) {
+                        System.out.println("Wrong number format!");
+                        number = "[no number]";
+                    }
+                    number = value;
+                    break;
+            }
+        }
+
+    }
+  learner_created: true
+- name: src/contacts/Organization.java
+  visible: true
+  text: |
+    package contacts;
+
+    import java.lang.reflect.Field;
+    import java.util.ArrayList;
+    import java.util.Collections;
+    import java.util.List;
+
+    import static contacts.Utils.checkNumber;
+
+    public class Organization extends Contact {
+        String address;
+
+        public Organization(String orgName, String address, String number) {
+            super(orgName, number);
+            this.address = address;
+        }
+
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+
+        public String getInfo() {
+            return "Organization name: " + this.name +
+                    "\nAddress: " + address +
+                    "\nNumber: " + number +
+                    "\nTime created: " + Contact.formatDate(creationDateTime) +
+                    "\nTime last edit: " + Contact.formatDate(lastEditDateTime);
+        }
+
+        @Override
+        public void setField(String field, String value) {
+            switch (field) {
+                case "name":
+                    name = value;
+                    break;
+                case "address":
+                    address = value;
+                    break;
+                case "number":
+                    if (!checkNumber(value)) {
+                        System.out.println("Wrong number format!");
+                        number = "[no number]";
+                    }
+                    number = value;
+                    break;
+            }
+        }
+
+    }
+  learner_created: true
+- name: src/contacts/Gender.java
+  visible: true
+  text: |
+    package contacts;
+
+    public enum Gender {
+        M, F
+    }
+  learner_created: true
+- name: src/contacts/Contacts.java
+  visible: true
+  text: |
+    package contacts;
+
+    import java.util.ArrayList;
+    import java.util.Scanner;
+
+    import static contacts.Utils.checkNumber;
+
+    public class Contacts {
+        Scanner sc = new Scanner(System.in);
+        ArrayList<Contact> contacts = new ArrayList<>();
+
+
+        private void count() {
+            System.out.println("The Phone Book has " + contacts.size() + " records.");
+        }
+
+        private void remove() {
+            if (contacts.size() == 0) {
+                System.out.println("No records to remove!");
+                return;
+            }
+
+            this.list();
+            System.out.println("Select record:");
+            String record = sc.nextLine();
+
+            contacts.remove(Integer.parseInt(record) - 1);
+            System.out.println("The record removed!");
+        }
+
+        private void edit() {
+            if (contacts.size() == 0) {
+                System.out.println("No records to edit!");
+                return;
+            }
+
+            this.list();
+            System.out.println("Select record:");
+            String record = sc.nextLine();
+
+            EditFactory factory = new EditFactory();
+            Contact cont = factory.editAccount(contacts.get(Integer.parseInt(record) - 1));
+            contacts.set(Integer.parseInt(record) - 1, cont);
+
+            System.out.println("The record updated!");
+        }
+
+        private void add() {
+            AddFactory addFactory = new AddFactory();
+            contacts.add(addFactory.createContact());
+            System.out.println("The record added");
+        }
+
+        private void list() {
+            for (int i = 0; i < contacts.size(); i++) {
+                System.out.println(i + 1 + ". " + contacts.get(i).toString());
+            }
+        }
+
+        private void info() {
+            this.list();
+            System.out.println("Enter index to show info:");
+            String index = sc.nextLine();
+            Contact c = contacts.get(Integer.parseInt(index) - 1);
+            System.out.println(c.getInfo());
+        }
+
+        public void getMenu() {
+            while (true) {
+                System.out.println();
+                System.out.println("Enter action (add, remove, edit, count, info, exit):");
+
+                String choice = sc.nextLine();
+                if (choice.equals("exit")) {
+                    break;
+                }
+
+                switch (choice) {
+                    case "count":
+                        this.count();
+                        break;
+                    case "edit":
+                        this.edit();
+                        break;
+                    case "remove":
+                        this.remove();
+                        break;
+                    case "add":
+                        this.add();
+                        break;
+                    case "info":
+                        this.info();
+                        break;
+                }
+
+            }
+        }
+
+    }
+  learner_created: true
+- name: src/contacts/AddFactory.java
+  visible: true
+  text: |
+    package contacts;
+
+    import java.util.Scanner;
+
+    import static contacts.Utils.checkNumber;
+
+    public class AddFactory {
+        Scanner sc = new Scanner(System.in);
+
+        public Contact createContact() {
+            Contact contact = null;
+            String number;
+            String name;
+
+            System.out.println("Enter the type (person, organization):");
+            String in = sc.nextLine();
+
+            switch (ContactType.valueOf(in.toUpperCase())) {
+                case PERSON:
+                    User us = new User();
+                    System.out.println("Enter the name:");
+                    name = sc.nextLine();
+                    us.setName(name);
+                    System.out.println("Enter the surname:");
+                    String surname = sc.nextLine();
+                    us.setSurname(surname);
+                    System.out.println("Enter the birth date:");
+                    String birthDate = sc.nextLine();
+                    us.setBirthDate(birthDate);
+                    System.out.println("Enter the gender (M, F)");
+                    String gender = sc.nextLine();
+                    us.setGender(gender);
+                    System.out.println("Enter the number:");
+                    number = sc.nextLine();
+                    if (!checkNumber(number)) {
+                        System.out.println("Wrong number format!");
+                        number = "[no number]";
+                    }
+                    us.setNumber(number);
+                    contact = us;
+                    break;
+                case ORGANIZATION:
+                    System.out.println("Enter the organization name:");
+                    name = sc.nextLine();
+                    System.out.println("Enter the address:");
+                    String address = sc.nextLine();
+                    System.out.println("Enter the number:");
+                    number = sc.nextLine();
+                    if (!checkNumber(number)) {
+                        System.out.println("Wrong number format!");
+                        number = "[no number]";
+                    }
+                    contact = new Organization(name, address, number);
+                    break;
+            }
+
+            return contact;
+        }
+    }
+  learner_created: true
+- name: src/contacts/Serialization.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/5327#comment
 status: Unchecked
 record: -1

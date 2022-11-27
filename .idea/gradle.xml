@@ -31,6 +31,8 @@
             <option value="$PROJECT_DIR$/Topics/Command/Real-World examples" />
             <option value="$PROJECT_DIR$/Topics/Command/Stock Broker" />
             <option value="$PROJECT_DIR$/Topics/Command/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Custom serialization/The Range class" />
+            <option value="$PROJECT_DIR$/Topics/Custom serialization/Theory" />
             <option value="$PROJECT_DIR$/Topics/Enumset/Basic job requirements" />
             <option value="$PROJECT_DIR$/Topics/Enumset/Set of vowels" />
             <option value="$PROJECT_DIR$/Topics/Enumset/The correct set" />
@@ -53,6 +55,8 @@
             <option value="$PROJECT_DIR$/Topics/Match results/Theory" />
             <option value="$PROJECT_DIR$/Topics/Match results/What do we get" />
             <option value="$PROJECT_DIR$/Topics/Match results/Wrong move" />
+            <option value="$PROJECT_DIR$/Topics/Output streams/Convert to char array" />
+            <option value="$PROJECT_DIR$/Topics/Output streams/Theory" />
             <option value="$PROJECT_DIR$/Topics/Reflection basics/Field count" />
             <option value="$PROJECT_DIR$/Topics/Reflection basics/Theory" />
             <option value="$PROJECT_DIR$/Topics/Regexes in programs/Check the clock time" />
@@ -66,6 +70,10 @@
             <option value="$PROJECT_DIR$/Topics/Runtime type checking/Sort out the classes" />
             <option value="$PROJECT_DIR$/Topics/Runtime type checking/Theory" />
             <option value="$PROJECT_DIR$/Topics/Runtime type checking/Who is who" />
+            <option value="$PROJECT_DIR$/Topics/Serialization basics/Container with transient fields" />
+            <option value="$PROJECT_DIR$/Topics/Serialization basics/Serializable user" />
+            <option value="$PROJECT_DIR$/Topics/Serialization basics/Theory" />
+            <option value="$PROJECT_DIR$/Topics/Serialization basics/What does the code output" />
             <option value="$PROJECT_DIR$/Topics/Switch statement/Direction" />
             <option value="$PROJECT_DIR$/Topics/Switch statement/Floor-space of the room" />
             <option value="$PROJECT_DIR$/Topics/Switch statement/From string to a number" />

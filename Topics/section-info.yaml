@@ -12,3 +12,6 @@ content:
 - Command
 - Abstract factory
 - Switch statement
+- Output streams
+- Serialization basics
+- Custom serialization

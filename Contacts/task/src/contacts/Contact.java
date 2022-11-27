@@ -1,15 +1,18 @@
 package contacts;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public abstract class Contact {
+public abstract class Contact implements Serializable {
 
     protected String name;
     protected String number;
 
     protected LocalDateTime creationDateTime;
     protected LocalDateTime lastEditDateTime;
+
+    private static final long serialVersionUID = 123;
 
     public Contact(){
         this.creationDateTime = LocalDateTime.now();
