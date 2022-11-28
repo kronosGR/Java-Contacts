@@ -55,4 +55,9 @@ public class Organization extends Contact {
         }
     }
 
+
+    enum Fields {
+        NAME, ADDRESS, NUMBER
+    }
+
 }

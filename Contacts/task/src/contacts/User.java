@@ -105,4 +105,8 @@ public class User extends Contact {
         }
     }
 
+    enum Fields {
+        NAME, SURNAME, BIRTHDATE, GENDER, NUMBER
+    }
+
 }
